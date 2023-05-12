@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <title>SQLab</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap 4 References -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <!-- Link to FontAwesome -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Your custom CSS -->
+    <link rel="stylesheet" href="css/app.css">
+    <!-- Your custom JavaScript -->
+    <script src="js/app.js"></script>
+
+    <!-- Chart.js API -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.2.1/dist/chart.umd.min.js"></script>
+</head>
+
+<body>
+
+<!-- Top Navigation Bar -->
+
+<!-- <nav> -->
+    <div class="topnav" style="display: none;">
+        <!-- <a href="#" class ="navbar-brand">
+            <img id= "homepageIcon" alt="SQLab Icon" src="css/sqlab (3).png" style="width:150px">
+        </a> -->
+
+        <!-- Logo -->
+        <a class ="navbar-brand" href="#">
+            <img alt="SQLab Logo" src="css/sqlab (3).png" style="width:150px;" id= "homepageIcon">
+            <!-- &nbsp;&nbsp; -->
+        </a>
+
+        <a href="index.html">
+            <img alt="Logout Icon" src="css/logout.png" style="width:50px">
+        </a>
+        <a role = "button" href="#" style="display:none;" id= "adminIcon"> 
+            <img alt="Admin Settings Icon"  src="css/admin.png" style="width:50px;" ">
+        </a>
+    </div>
+<!-- </nav> -->
+
+<br><br><br><br>
+
+<!--Start container for BS4 (Bootstrap 4) formatting-->
+<div class="container-fluid">
+
+    <div class="row">
+    <div class="col-md-2"></div>
+
+	<div class="col-md-8 content-wrapper " id="div-login"> <!-- add style="display: none;" to stop-->
+        <center>
+            <form id='form-login'>
+                    
+                    <img id= "sqlabicon" alt="SQLab Icon" src="css/sqlab (2).png" style="width:500px">
+                    <b><label for="username">User name:</label></b>
+                    <input type="text" name="username" id="username" class="form-control">
+                    <br>
+
+                    <b><label for="password">Password:</label></b>
+                    <input type="password" name="password" id="password" class="form-control">
+                    <br>
+
+                    <label for="login_as-login" >Are you an admin or student?</label>
+                    <select name = "login_as" id="login_as-login" required="required">
+                        <!-- <option value="blank">----</option> -->
+                        <option value="client">Student</option>
+                        <option value="admin">Admin</option>
+                    </select>
+
+                    <br><br>
+
+                    <div class="text-center">
+                    <input type="button" value="Login" id="btnLogin" class="btn btn-primary" style="font-size:2em;width:100%;" >
+
+                    <br><br>
+
+                    <input type ="button" value="Sign Up" id="btnsignup" class ="btn btn-secondary" style="font-size:2em;width:100%;">
+
+                    </div>
+
+                    <br>
+                <div id='login_message' class="">
+                </div>
+			</form>
+        </center>
+	</div>
+
+
+        <div class="col-md-8 content-wrapper " id="div-signup" style="display: none;">
+			<center>
+                <form id="form-signup">
+                    <br><br><br>
+                    <H1> Sign up here </H1>
+                    <br><br><br>
+                    <b><label for="newusername">User name:</label></b>
+                    <input type="text" name="username" id="newusername" class="form-control" >
+                    <br>
+                    <b><label for="newpassword">Password:</label></b>
+                    <input type="password" name="password" id="newpassword" class="form-control" >
+                    <br>
+                    <b><label for="newpassword2">Confirm your password:</label></b>
+                    <input type="password" id="newpassword2" class="form-control" >
+                    <br>
+                    <b><label for="email">Email:</label></b>
+                    <input type="text" name="email" id="email" class="form-control" >
+                    <br>
+                    <b><label for="signup_as-signup">Are you an admin or student?</label></b>
+                    <br>
+                    <select name = "signup_as" id="signup_as-signup" required="required">
+                        <option value="blank">----</option>
+                        <option value="admin">Admin</option>
+                        <option value="client">Student</option>
+                    </select>
+                    <br><br>
+                
+                    <div class="text-center">
+                        <input type="button" value="Create New Account" id="btnCreateAccount" class="btn btn-primary" style="font-size:2em;width:100%;" >
+                        <br>
+                        <br>
+                        <input type ="button" value="Cancel" id="btnCancelMakeAccount" class ="btn btn-secondary" style="font-size:2em;width:100%;">
+                    </div>
+                    <br>
+                    <div id="signup_message" class="">
+
+                    </div>
+                </form>
+            </center>
+		</div>
+
+        <div class="col-md-8 content-wrapper " id="div-homepage" style="display: none;">
+            <center>
+                <br> 
+                <h1 style="font-size: 60px; color: #000000;" class="font-effect-shadow-multiple">Welcome to</h1>
+                <img id= "sqlabicon" alt="SQLab Icon" src="css/sqlab (2).png" style="width:500px">
+                <h1 class="font-effect-shadow-multiple">Your Current Score: <span id="number"></span></h1>
+                <br> <br>
+            </center>
+            <div class = "row">
+                <div class = "column" id="div-takeQuiz">
+                    <center><input type="button" value="Quiz Yourself" id="quiz" class = "btn btn-primary" style="font-size:2em;width:100%;" ></center>
+                    <br>
+                    <p>Test your ability to write SQL queries here! With the quiz feature, you can choose from 3 different level difficulties (easy, medium, and hard).
+                        Once you choose a difficulty, you will get a certain amount of questions to answer per section. You may use the schema provided to you in each of these sections. Once you feel you have completed the question with the best of your ability, you may check your answer. If your answer is correct, you will be awarded a certain amount of points. You are able to answer each question at different times with the "back" and "next" buttons. You may view your final score on the homepage. Have fun!</p>
+                    <br>
+       
+                </div> 
+                <div class = "column" id="div-learn">
+                    <center><input type="button" value="Learn More" id="learn" class = "btn btn-primary" style="font-size:2em;width:100%;" ></center>
+                    <br>
+                    <p>Learn more about SQL here! Wondering how to use an ORDER BY statement or how to join two tables? Click the learn more button to check out different LinkedIn Learning videos where you will be directed to their external site. </p> 
+                    <br>
+                    <p>LinkedIn Learning is an American online learning provider. It provides video courses taught by industry experts in software, creative, and business skills. It is a subsidiary of LinkedIn. All the courses on LinkedIn fall into four categories: Business, Creative, Technology and Certifications.</p> 
+                    <br>
+                </div> 
+            </div>
+
+            <center>
+                <b>
+                    <p>Easy: 1 point each</p>
+                    <p>Medium: 2 points each</p>
+                    <p>Hard: 3 points each</p>
+                </b>
+            </center>
+
+            <div id="div-leaderboard" class="column">
+                <center><h1>SQLab Leaderboard</h1></center>
+                <div>
+                    <a>
+                        <label for="myChart"></label>
+                        <canvas alt="SQLab Leaderboard Chart" id="myChart" style="text-align: centerstyle; height: 150px" title="SQLab Leaderboard"></canvas>
+                    </a>
+                    <!-- <label for="myChart" style="display:none;">Chart</label> -->
+                    <!-- <canvas alt="SQLab Leaderboard Chart" id="myChart" style="text-align: centerstyle; height: 300px"></canvas> -->
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-8 content-wrapper " id="div-difficulty" style="display: none;">
+            <br> <br>
+            <center><h1>Pick your difficulty level</h1></center>
+            <br>
+
+            <form id = "form-question-difficulty"> 
+                <input type = 'hidden' id = 'difficulty' value = 'blank' name = 'difficulty'>
+            </form>
+            <input type="button" value="Easy" class="btn btn-info" id="easy" style="font-size:3em;width:100%">
+            <br><br>
+
+            <input type="button" value="Medium" class="btn btn-info" id="medium" style="font-size:3em;width:100%">
+            <br><br>
+
+            <input type="button" value="Hard" class="btn btn-info" id="hard" style="font-size:3em;width:100%">
+        </div>
+
+
+        <div class="col-md-8 content-wrapper " id="div-yes" style="display: none;">
+
+            <div class="row">
+                <div class="column" style="padding: 30px;">
+                    <h1>Learn more!</h1>
+                    <br>
+                    <p>Learn more about SQL here! Wondering how to use an ORDER BY statement or how to join two tables? Click the links to the right to check out different LinkedIn Learning videos where you will be directed to their external site. </p> 
+                    <br>
+                </div>
+                <div class="column" style="padding: 30px;">
+                   <h1>Watch videos here</h1>
+                   <br>
+                   <a style="color:#0a0071" href="https://www.linkedin.com/learning-login/share?account=2206009&forceAccount=false&redirect=https%3A%2F%2Fwww.linkedin.com%2Flearning%2Flearning-sql-programming-8382385%2Fwhat-is-a-database%3Ftrk%3Dshare_video_url%26shareId%3DckeNBaUOQHmcQD5lmiYouw%253D%253D" target="_blank">What is a database?</a>
+                   <br><br>
+                   <a style="color:#0a0071" href="https://www.linkedin.com/learning-login/share?account=2206009&forceAccount=false&redirect=https%3A%2F%2Fwww.linkedin.com%2Flearning%2Flearning-sql-programming-8382385%2Fwhat-is-sql%3Ftrk%3Dshare_video_url%26shareId%3DckeNBaUOQHmcQD5lmiYouw%253D%253D" target="_blank">What is SQL?</a>
+                   <br><br>
+                   <a style="color:#0a0071" href="https://www.linkedin.com/learning-login/share?account=2206009&forceAccount=false&redirect=https%3A%2F%2Fwww.linkedin.com%2Flearning%2Flearning-sql-programming-8382385%2Fask-for-data-with-select%3Ftrk%3Dshare_video_url%26shareId%3DckeNBaUOQHmcQD5lmiYouw%253D%253D" target="_blank">SELECT keyword</a>
+                   <br><br>
+                   <a style="color:#0a0071" href="https://www.linkedin.com/learning-login/share?account=2206009&forceAccount=false&redirect=https%3A%2F%2Fwww.linkedin.com%2Flearning%2Flearning-sql-programming-8382385%2Fnarrow-down-a-query-with-where%3Ftrk%3Dshare_video_url%26shareId%3DckeNBaUOQHmcQD5lmiYouw%253D%253D" target="_blank">WHERE keyword</a>
+                   <br><br>
+                   <a style="color:#0a0071" href="https://www.linkedin.com/learning-login/share?account=2206009&forceAccount=false&redirect=https%3A%2F%2Fwww.linkedin.com%2Flearning%2Flearning-sql-programming-8382385%2Fadding-more-criteria-to-a-statement%3Ftrk%3Dshare_video_url%26shareId%3DckeNBaUOQHmcQD5lmiYouw%253D%253D" target="_blank">Adding Criteria</a>
+                   <br><br>
+                   <a style="color:#0a0071" href="https://www.linkedin.com/learning-login/share?account=2206009&forceAccount=false&redirect=https%3A%2F%2Fwww.linkedin.com%2Flearning%2Flearning-sql-programming-8382385%2Forganize-responses-with-order-by%3Ftrk%3Dshare_video_url%26shareId%3DckeNBaUOQHmcQD5lmiYouw%253D%253D" target="_blank">ORDER BY</a>
+                   <br><br>
+                   <a style="color:#0a0071" href="https://www.linkedin.com/learning-login/share?account=2206009&forceAccount=false&redirect=https%3A%2F%2Fwww.linkedin.com%2Flearning%2Flearning-sql-programming-8382385%2Fask-for-data-across-two-or-more-tables%3Ftrk%3Dshare_video_url%26shareId%3DckeNBaUOQHmcQD5lmiYouw%253D%253D" target="_blank">JOIN</a>
+                   <br><br>
+                   <a style="color:#0a0071" href="https://www.linkedin.com/learning-login/share?account=2206009&forceAccount=false&redirect=https%3A%2F%2Fwww.linkedin.com%2Flearning%2Flearning-sql-programming-8382385%2Funderstand-join-types%3Ftrk%3Dshare_video_url%26shareId%3DckeNBaUOQHmcQD5lmiYouw%253D%253D" target="_blank">Understanding JOIN</a>
+                   <br><br>
+                   <a style="color:#0a0071" href="https://www.linkedin.com/learning-login/share?account=2206009&forceAccount=false&redirect=https%3A%2F%2Fwww.linkedin.com%2Flearning%2Flearning-sql-programming-8382385%2Fgrouping-results%3Ftrk%3Dshare_video_url%26shareId%3Dkerer9vzTLStYZBeXUXcbg%253D%253D" target="_blank">Grouping Results</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-8 content-wrapper" id="div-easy" style="display: none;">
+
+            <div id="question"> <!--this is where the question will get appended-->
+                <center><h1 style="font-size: xxx-large;"><span id = "questionNumber_easy" class = "qn"></span> <span class = 'qt' id = 'qt1'>...</span></h1></center>
+                <!-- <center><p style="font-size:x-large"></p></center> -->
+            </div>
+
+            <br><br>
+
+
+        </div>
+
+        <div class="col-md-8 content-wrapper" id="div-medium" style="display: none;">
+
+            <div id="question"> <!--this is where the question will get appended-->
+                <center><h1 style="font-size: xxx-large;"><span id = "questionNumber_medium" class = "qn"></span> <span class = 'qt' id = 'qt2'>...</span></h1></center>
+                <!-- <center><p style="font-size:x-large"></p></center> -->
+            </div>
+
+            <br><br>
+
+        </div>
+
+        <div class="col-md-8 content-wrapper" id="div-hard" style="display: none;">
+
+            <div id="question"> <!--this is where the question will get appended-->
+                <center><h1 style="font-size: xxx-large;"><span id = questionNumber_hard class = "qn"></span>  <span class = 'qt' id = 'qt3'>...</span></h1></center>
+                <!-- <center><p style="font-size:x-large"></p></center> -->
+            </div>
+
+            <br><br>
+
+        </div>
+
+        <!-- ADMIN DIV HERE -->
+
+        <div class="col-md-8 content-wrapper" id="div-admin" style="display: none;">
+            <center><h1 style="font-size: xx-large;">Admin Page</h1></center>
+            <br>
+            <div id="adminInformation">
+                <center><h2><b>How this works:</b></h2></center>
+                <br>
+                <center><p>Please use this schema for your questions</p></center>
+                <br>
+                <center><img alt="Schema" src="css/schema.jpeg" style="width:450px;"></center>
+                <br>
+                <b>Question</b>
+                <p> Enter the question just like how you would ask any student! (Ex: "How many actors have the last name of Lee?")  </p>
+                <br>
+                <b>Answer</b>
+                <p> This is the tricky part. Instead of entering a SQL query or statement, <b>enter the expect output/return.</b></p>
+                <p> So rather than inputting the answer as </p>
+                    <p>"SELECT COUNT(*) FROM moviedb.actor WHERE last_name = Lee", </p>
+                    <p>enter the answer of 3</p>
+                <br> 
+
+                <button type="button" class="collapsible" data-toggle="collapse" data-target="#demo" style="background-color: rgb(37, 104, 228);">Answers with multiple rows and/or fields</button>
+                <div id="demo" class="collapse">
+                    <h3> SQL Query Result:</h3>
+                    <img id="result0" alt="correct" src="css/myworkbench_result.png" style="width:300px;">
+                    <h3> How the answer is stored in the question bank database:</h3>
+                    <img id="result1" alt="correct0" src="css/answerkey_format.png" style="width:300px;">
+                </div>
+                <br>
+
+                <br>
+                <pr>Many queries can return the same result, and it's the result that matters at the end of the day!</pr>
+            </div>
+            
+            <center>
+                <form id = "form-admin">
+                    <input type=hidden name='username' id = 'username_admin' value=''> 
+                    <br>
+                    <label for = "sql_question_admin"> Question: </label>
+                    <input type="text" id = "sql_question_admin" name="sql_question" required="required" size=90>
+                    <br>
+
+                    <label for = "sql_answer_admin"> Correct result: </label>
+                    <input type="text" id = "sql_answer_admin" name="sql_answer" required="required" size=90>
+                    <br>
+                    <label for="admin-difficulty"><b>Choose a difficulty</b></label>
+                    <select name = "difficulty" id="admin-difficulty" required="required">
+                        <option></option>
+                        <option value=1>Easy</option>
+                        <option value=2>Medium</option>
+                        <option value=3>Hard</option>
+                    </select>
+                    <br><br>
+                    <input type="button" value="Add to Database" id = "addToDatabase" class="btn btn-primary" name="" style="font-size:1em;width:35%">
+                </form>
+                <br>
+                <div id="admin-message" class="" style="font-size:1em;width:35%">
+
+                </div>
+            </center>
+        </div>
+
+        <div class="col-md-12 content-wrapper" id="div-sqlQuery" style="display: none;">
+            <center>
+            <form id = "form-sql_query">
+                <input type = 'hidden' id = 'username_sql' value = 'blank' name = 'username'>
+                <input type = 'hidden' id = 'difficulty_sql' value = 'blank' name = 'difficulty'>
+                <input type = 'hidden' id = 'question_id_sql' value = 'blank' name = 'question_id'>
+                <center>
+                    <label for="sql_query">Enter query here:</label>
+                    <input type="text" id = "sql_query" name="sql_query" required="required" size=70>
+                </center>
+            </form>
+            </center>
+            <br>
+
+            <center>
+                <button id = "checkAnswer" class="btn btn-primary" style="color:beige ;font-size:1em;width: 30%" >
+                    <b>Check</b>
+                </button>
+                <br><br>
+                <i class="fa fa-spinner fa-spin" aria-hidden="true" id="spinner1" style="display:none;font-size:50px;"></i>
+            </center>
+            <br>
+                <center>
+                    <div id="sql_message" class="" style="font-size:1em;width:30%">
+
+                    </div>
+                </center>
+
+            <br>
+
+            <center>
+                <div class="" id ="correct" style="font-size:1em;width:30%" >
+                    
+                </div>
+
+                <img id="correctImage" alt="correct" src="css/Correct.png" style="width:100px; display:none;">
+            </center>
+            <center>
+                <div class="" id ="wrong" style="font-size:1em;width:30%" >
+                    
+                </div>
+
+                <img id="wrongImage" alt="wrong" src="css/Wrong.png" style="width:100px; display:none;">
+            </center>
+
+            <br><br>
+
+            <div id = "schema">
+                <center><p style="font-size: x-large;">Please use this schema for the questions. The database is called <b>"moviedb"</b></p></center>
+                <center><img alt="Schema" src="css/schema.jpeg" style="width:450px;"></center>
+            </div>
+            
+            <br><br>
+
+            <div class="row"> <!--this is the buttons at the bottom-->
+                <div class="column">
+                    <center><input type="button" value="Back" class="btn btn-secondary" id="back" style="font-size:1em;width:30%"> </center>
+                    <br>
+                    <center>
+                        <div id="backMessage" style="font-size:1em;width:70%;">
+
+                        </div>
+                    </center>
+                </div>
+                <div class="column">
+                    <center><input type="button" value="Next" class="btn btn-success" id="next" style="font-size:1em;width:30%"> </center>
+                    <br>
+                    <center>
+                        <div id="nextMessage" style="font-size:1em;width:70%;">
+
+                        </div>
+                    </center>
+                </div>
+            </div>
+
+            <center><input type="button" value="Submit" id = "submit" class="btn btn-success" name="" style="font-size:3em;width:50%;display:none;"></center>
+
+        </div>
+
+    <!-- <div class="col-md-2"></div> -->
+    </div>
+
+<div class="row">
+    <div class="col-md-12 text-center">
+        <div>
+            &nbsp;
+        </div>
+    </div>
+</div>
+
+</div> <!-- container //-->
+</body>
+
+<script>
+    let chart = null;
+
+    var runLeaderboard = (topFivePlayersName, topFivePlayersScore) => {
+
+        console.log('html function:' , topFivePlayersName, topFivePlayersScore);
+
+        const ctx = $("#myChart");
+        
+        if (chart!=null){
+            chart.destroy();
+        }
+        chart= new Chart(ctx, {
+        type: "bar",
+        data: {
+            labels: topFivePlayersName,
+            datasets: [
+            {
+                axis: 'y',
+                data: topFivePlayersScore,
+                labels: topFivePlayersName,
+                fill: false,
+                backgroundColor: [
+                'rgba(255, 99, 132)',
+                'rgba(255, 159, 64)',
+                'rgba(255, 205, 86)',
+                'rgba(75, 192, 192)',
+                'rgba(54, 162, 235)'
+                ],
+                borderColor: [
+                'rgb(255, 99, 132)',
+                'rgb(255, 159, 64)',
+                'rgb(255, 205, 86)',
+                'rgb(75, 192, 192)',
+                'rgb(54, 162, 235)'
+                ],
+                borderWidth: 1
+            }
+            ]
+        },
+       
+        options: {
+            plugins: { 
+            legend: {
+                display: false,
+                labels: {
+                    color: 'rgb(255, 99, 132)'
+                }
+            },
+            title: {
+                indexAxis: 'y',
+                text: "SQLab Leaderboard",
+                display: false
+            } ,
+            maintainAspectRatio: false
+        }
+        }
+        });
+
+        // chart = new Chart(ctx, {
+        // type: "bar",
+        // data: {
+        //     labels: topFivePlayersName,
+        //     datasets: [
+        //     {
+        //         axis: 'y',
+        //         data: topFivePlayersScore,
+        //         labels: topFivePlayersName,
+        //         fill: false,
+        //         backgroundColor: [
+        //         'rgba(255, 99, 132)',
+        //         'rgba(255, 159, 64)',
+        //         'rgba(255, 205, 86)',
+        //         'rgba(75, 192, 192)',
+        //         'rgba(54, 162, 235)'
+        //         ],
+        //         borderColor: [
+        //         'rgb(255, 99, 132)',
+        //         'rgb(255, 159, 64)',
+        //         'rgb(255, 205, 86)',
+        //         'rgb(75, 192, 192)',
+        //         'rgb(54, 162, 235)'
+        //         ],
+        //         borderWidth: 1
+        //     }
+        //     ]
+        // },
+       
+        // options: {
+        //     plugins: { 
+        //     legend: {
+        //         display: false,
+        //         labels: {
+        //             color: 'rgb(255, 99, 132)'
+        //         }
+        //     },
+        //     title: {
+        //         indexAxis: 'y',
+        //         text: "SQLab Leaderboard",
+        //         display: false
+        //     } ,
+        //     maintainAspectRatio: false
+        // }
+        // }
+        // }); 
+
+    }
+    
+</script>
+
+</html>
