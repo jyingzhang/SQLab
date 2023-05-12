@@ -11,7 +11,7 @@ Najuk worked on the client-side with the css, html, and the event handlers.
 SQLab is built using RESTful API archictecure and is stored on AWS S3.
 This application utilizes two databases: moviedb and mis259cherry on MySQLWorkbench.
 
-MIS259cherry has two tables: users and questions. The users table stores the following information: userid, username, password, email, score, and if user is an admin or client. 
+mis259cherry has two tables: users and questions. The users table stores the following information: userid, username, password, email, score, and if user is an admin or client. 
 The questions table stores the questionid, question (text), answer, and difficulty. 
 
 The moviedb database actually contains all of the schema information. So for example, the user will enter a query, and that query will be ran on the moveidb database.
