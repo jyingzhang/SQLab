@@ -14,5 +14,5 @@ This application utilizes two databases: moviedb and mis259cherry on MySQLWorkbe
 mis259cherry has two tables: users and questions. The users table stores the following information: userid, username, password, email, score, and if user is an admin or client. 
 The questions table stores the questionid, question (text), answer, and difficulty. 
 
-The moviedb database actually contains all of the schema information. So for example, the user will enter a query, and that query will be ran on the moveidb database.
+The moviedb database is used to run the queries, and the questions were made using this database. So for example, the user will enter a query, and that query will be ran on the moveidb database.
 The result (from the moviedb database) will be compared to the answer stored in the mis259cherry database.
