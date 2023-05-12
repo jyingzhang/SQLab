@@ -3,7 +3,7 @@ Video demonstration of SQLab: https://youtu.be/tAnjDm4DKKM
 
 SQLab is an web application that quizzes users on SQL queries and let users earn points by answering questions correctly. 
 
-This was a a final group project for MIS3502 (Web Service Programming) with my partner Najuk Patel.
+This was a final group project for MIS3502 (Web Service Programming) with my partner Najuk Patel.
 I was in charge of the server-side and also helped with client-side a bit.
 I worked on the Lambda function, database, integration of the ChartJS, and the ajax calls.
 Najuk worked on the client-side with the css, html, and the event handlers. 
