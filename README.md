@@ -1,7 +1,7 @@
 # SQLab
 Video demonstration of SQLab: https://youtu.be/tAnjDm4DKKM
 
-SQLab is an web application that quizzes users on SQL queries and let users earn points by answering questions correctly. 
+SQLab is a web application that quizzes users on SQL queries and let users earn points by answering questions correctly. 
 
 This was a final group project for MIS3502 (Web Service Programming) with my partner Najuk Patel.
 I was in charge of the server-side and also helped with client-side a bit.
